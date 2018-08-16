@@ -6,5 +6,5 @@ java 10
 ant 10
 ubuntu 16.04
 
-#build
+# build
 ant -f offlinetxtool.xml
