@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="offlinetxtool" default="all">
+  
+  
+  <property file="offlinetxtool.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.10" value="${jdk.home.10}/bin"/>
+  <path id="jdk.classpath.10">
+    <fileset dir="${jdk.home.10}">
+      <include name="../jdk-10.0.1!/java.activation"/>
+      <include name="../jdk-10.0.1!/java.base"/>
+      <include name="../jdk-10.0.1!/java.compiler"/>
+      <include name="../jdk-10.0.1!/java.corba"/>
+      <include name="../jdk-10.0.1!/java.datatransfer"/>
+      <include name="../jdk-10.0.1!/java.desktop"/>
+      <include name="../jdk-10.0.1!/java.instrument"/>
+      <include name="../jdk-10.0.1!/java.jnlp"/>
+      <include name="../jdk-10.0.1!/java.logging"/>
+      <include name="../jdk-10.0.1!/java.management"/>
+      <include name="../jdk-10.0.1!/java.management.rmi"/>
+      <include name="../jdk-10.0.1!/java.naming"/>
+      <include name="../jdk-10.0.1!/java.prefs"/>
+      <include name="../jdk-10.0.1!/java.rmi"/>
+      <include name="../jdk-10.0.1!/java.scripting"/>
+      <include name="../jdk-10.0.1!/java.se"/>
+      <include name="../jdk-10.0.1!/java.se.ee"/>
+      <include name="../jdk-10.0.1!/java.security.jgss"/>
+      <include name="../jdk-10.0.1!/java.security.sasl"/>
+      <include name="../jdk-10.0.1!/java.smartcardio"/>
+      <include name="../jdk-10.0.1!/java.sql"/>
+      <include name="../jdk-10.0.1!/java.sql.rowset"/>
+      <include name="../jdk-10.0.1!/java.transaction"/>
+      <include name="../jdk-10.0.1!/java.xml"/>
+      <include name="../jdk-10.0.1!/java.xml.bind"/>
+      <include name="../jdk-10.0.1!/java.xml.crypto"/>
+      <include name="../jdk-10.0.1!/java.xml.ws"/>
+      <include name="../jdk-10.0.1!/java.xml.ws.annotation"/>
+      <include name="../jdk-10.0.1!/javafx.base"/>
+      <include name="../jdk-10.0.1!/javafx.controls"/>
+      <include name="../jdk-10.0.1!/javafx.deploy"/>
+      <include name="../jdk-10.0.1!/javafx.fxml"/>
+      <include name="../jdk-10.0.1!/javafx.graphics"/>
+      <include name="../jdk-10.0.1!/javafx.media"/>
+      <include name="../jdk-10.0.1!/javafx.swing"/>
+      <include name="../jdk-10.0.1!/javafx.web"/>
+      <include name="../jdk-10.0.1!/jdk.accessibility"/>
+      <include name="../jdk-10.0.1!/jdk.aot"/>
+      <include name="../jdk-10.0.1!/jdk.attach"/>
+      <include name="../jdk-10.0.1!/jdk.charsets"/>
+      <include name="../jdk-10.0.1!/jdk.compiler"/>
+      <include name="../jdk-10.0.1!/jdk.crypto.cryptoki"/>
+      <include name="../jdk-10.0.1!/jdk.crypto.ec"/>
+      <include name="../jdk-10.0.1!/jdk.deploy"/>
+      <include name="../jdk-10.0.1!/jdk.deploy.controlpanel"/>
+      <include name="../jdk-10.0.1!/jdk.dynalink"/>
+      <include name="../jdk-10.0.1!/jdk.editpad"/>
+      <include name="../jdk-10.0.1!/jdk.hotspot.agent"/>
+      <include name="../jdk-10.0.1!/jdk.httpserver"/>
+      <include name="../jdk-10.0.1!/jdk.incubator.httpclient"/>
+      <include name="../jdk-10.0.1!/jdk.internal.ed"/>
+      <include name="../jdk-10.0.1!/jdk.internal.jvmstat"/>
+      <include name="../jdk-10.0.1!/jdk.internal.le"/>
+      <include name="../jdk-10.0.1!/jdk.internal.opt"/>
+      <include name="../jdk-10.0.1!/jdk.internal.vm.ci"/>
+      <include name="../jdk-10.0.1!/jdk.internal.vm.compiler"/>
+      <include name="../jdk-10.0.1!/jdk.internal.vm.compiler.management"/>
+      <include name="../jdk-10.0.1!/jdk.jartool"/>
+      <include name="../jdk-10.0.1!/jdk.javadoc"/>
+      <include name="../jdk-10.0.1!/jdk.javaws"/>
+      <include name="../jdk-10.0.1!/jdk.jcmd"/>
+      <include name="../jdk-10.0.1!/jdk.jconsole"/>
+      <include name="../jdk-10.0.1!/jdk.jdeps"/>
+      <include name="../jdk-10.0.1!/jdk.jdi"/>
+      <include name="../jdk-10.0.1!/jdk.jdwp.agent"/>
+      <include name="../jdk-10.0.1!/jdk.jfr"/>
+      <include name="../jdk-10.0.1!/jdk.jlink"/>
+      <include name="../jdk-10.0.1!/jdk.jshell"/>
+      <include name="../jdk-10.0.1!/jdk.jsobject"/>
+      <include name="../jdk-10.0.1!/jdk.jstatd"/>
+      <include name="../jdk-10.0.1!/jdk.localedata"/>
+      <include name="../jdk-10.0.1!/jdk.management"/>
+      <include name="../jdk-10.0.1!/jdk.management.agent"/>
+      <include name="../jdk-10.0.1!/jdk.management.cmm"/>
+      <include name="../jdk-10.0.1!/jdk.management.jfr"/>
+      <include name="../jdk-10.0.1!/jdk.management.resource"/>
+      <include name="../jdk-10.0.1!/jdk.naming.dns"/>
+      <include name="../jdk-10.0.1!/jdk.naming.rmi"/>
+      <include name="../jdk-10.0.1!/jdk.net"/>
+      <include name="../jdk-10.0.1!/jdk.pack"/>
+      <include name="../jdk-10.0.1!/jdk.packager"/>
+      <include name="../jdk-10.0.1!/jdk.packager.services"/>
+      <include name="../jdk-10.0.1!/jdk.plugin"/>
+      <include name="../jdk-10.0.1!/jdk.plugin.server"/>
+      <include name="../jdk-10.0.1!/jdk.rmic"/>
+      <include name="../jdk-10.0.1!/jdk.scripting.nashorn"/>
+      <include name="../jdk-10.0.1!/jdk.scripting.nashorn.shell"/>
+      <include name="../jdk-10.0.1!/jdk.sctp"/>
+      <include name="../jdk-10.0.1!/jdk.security.auth"/>
+      <include name="../jdk-10.0.1!/jdk.security.jgss"/>
+      <include name="../jdk-10.0.1!/jdk.snmp"/>
+      <include name="../jdk-10.0.1!/jdk.unsupported"/>
+      <include name="../jdk-10.0.1!/jdk.xml.bind"/>
+      <include name="../jdk-10.0.1!/jdk.xml.dom"/>
+      <include name="../jdk-10.0.1!/jdk.xml.ws"/>
+      <include name="../jdk-10.0.1!/jdk.zipfs"/>
+      <include name="../jdk-10.0.1!/oracle.desktop"/>
+      <include name="../jdk-10.0.1!/oracle.net"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.10}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.10}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.10"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.lib.classpath">
+    <pathelement location="${basedir}/lib/jsr305-3.0.2.jar"/>
+    <pathelement location="${basedir}/lib/libnsc.jar"/>
+    <pathelement location="${basedir}/lib/logback-classic-1.2.3.jar"/>
+    <pathelement location="${basedir}/lib/logback-core-1.2.3.jar"/>
+    <pathelement location="${basedir}/lib/modAionBase.jar"/>
+    <pathelement location="${basedir}/lib/modCrypto.jar"/>
+    <pathelement location="${basedir}/lib/modRlp.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.7.25.jar"/>
+  </path>
+  
+  <path id="library.test.classpath">
+    <pathelement location="${basedir}/lib/hamcrest-all-1.3.jar"/>
+    <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+  </path>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module offlineTxTool -->
+  
+  <dirname property="module.offlinetxtool.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.offlinetxtool" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.offlinetxtool" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.offlinetxtool" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.offlinetxtool" value="-encoding UTF-8 -source 10 -target 10 ${compiler.args}"/>
+  
+  <property name="offlinetxtool.output.dir" value="${module.offlinetxtool.basedir}/out/production/offlineTxTool"/>
+  <property name="offlinetxtool.testoutput.dir" value="${module.offlinetxtool.basedir}/out/test/offlineTxTool"/>
+  
+  <path id="offlinetxtool.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="offlinetxtool.module.production.classpath">
+    <path refid="${module.jdk.classpath.offlinetxtool}"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="offlinetxtool.runtime.production.module.classpath">
+    <pathelement location="${offlinetxtool.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="offlinetxtool.module.classpath">
+    <path refid="${module.jdk.classpath.offlinetxtool}"/>
+    <pathelement location="${offlinetxtool.output.dir}"/>
+    <path refid="library.test.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="offlinetxtool.runtime.module.classpath">
+    <pathelement location="${offlinetxtool.testoutput.dir}"/>
+    <pathelement location="${offlinetxtool.output.dir}"/>
+    <path refid="library.test.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.offlinetxtool">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.offlinetxtool">
+    <patternset refid="excluded.from.module.offlinetxtool"/>
+  </patternset>
+  
+  <path id="offlinetxtool.module.sourcepath">
+    <dirset dir="${module.offlinetxtool.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="offlinetxtool.module.test.sourcepath">
+    <dirset dir="${module.offlinetxtool.basedir}">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.offlinetxtool" depends="compile.module.offlinetxtool.production,compile.module.offlinetxtool.tests" description="Compile module offlineTxTool"/>
+  
+  <target name="compile.module.offlinetxtool.production" description="Compile module offlineTxTool; production classes">
+    <mkdir dir="${offlinetxtool.output.dir}"/>
+    <javac destdir="${offlinetxtool.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.offlinetxtool}/javac">
+      <compilerarg line="${compiler.args.offlinetxtool}"/>
+      <bootclasspath refid="offlinetxtool.module.bootclasspath"/>
+      <classpath refid="offlinetxtool.module.production.classpath"/>
+      <src refid="offlinetxtool.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.offlinetxtool"/>
+    </javac>
+    
+    <copy todir="${offlinetxtool.output.dir}">
+      <fileset dir="${module.offlinetxtool.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.offlinetxtool.tests" depends="compile.module.offlinetxtool.production" description="compile module offlineTxTool; test classes" unless="skip.tests">
+    <mkdir dir="${offlinetxtool.testoutput.dir}"/>
+    <javac destdir="${offlinetxtool.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.offlinetxtool}/javac">
+      <compilerarg line="${compiler.args.offlinetxtool}"/>
+      <bootclasspath refid="offlinetxtool.module.bootclasspath"/>
+      <classpath refid="offlinetxtool.module.classpath"/>
+      <src refid="offlinetxtool.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.offlinetxtool"/>
+    </javac>
+    
+    <copy todir="${offlinetxtool.testoutput.dir}">
+      <fileset dir="${module.offlinetxtool.basedir}/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.offlinetxtool" description="cleanup module">
+    <delete dir="${offlinetxtool.output.dir}"/>
+    <delete dir="${offlinetxtool.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.offlinetxtool" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.offlinetxtool" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.offlinetxtool:jar" value="${basedir}"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.offlineTxTool.jar" value="${artifacts.temp.dir}/offlineTxTool.jar"/>
+  </target>
+  
+  <target name="artifact.offlinetxtool:jar" depends="init.artifacts, compile.module.offlinetxtool" description="Build &#39;offlineTxTool:jar&#39; artifact">
+    <property name="artifact.temp.output.offlinetxtool:jar" value="${artifacts.temp.dir}/offlineTxTool_jar"/>
+    <mkdir dir="${artifact.temp.output.offlinetxtool:jar}"/>
+    <jar destfile="${temp.jar.path.offlineTxTool.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${offlinetxtool.output.dir}"/>
+      <zipfileset src="${basedir}/lib/jsr305-3.0.2.jar"/>
+      <zipfileset src="${basedir}/lib/libnsc.jar"/>
+      <zipfileset src="${basedir}/lib/logback-classic-1.2.3.jar"/>
+      <zipfileset src="${basedir}/lib/logback-core-1.2.3.jar"/>
+      <zipfileset src="${basedir}/lib/modAionBase.jar"/>
+      <zipfileset src="${basedir}/lib/modCrypto.jar"/>
+      <zipfileset src="${basedir}/lib/modRlp.jar"/>
+      <zipfileset src="${basedir}/lib/slf4j-api-1.7.25.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.offlineTxTool.jar}" tofile="${artifact.temp.output.offlinetxtool:jar}/offlineTxTool.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.offlinetxtool:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.offlinetxtool:jar}"/>
+    <copy todir="${artifact.output.offlinetxtool:jar}">
+      <fileset dir="${artifact.temp.output.offlinetxtool:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
