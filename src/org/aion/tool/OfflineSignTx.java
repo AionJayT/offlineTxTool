@@ -83,7 +83,7 @@ public class OfflineSignTx {
 
         ECKey key = ECKeyFac.inst().fromPrivate(ByteUtil.hexStringToBytes(secKey));
         if (key == null) {
-            throw new NullPointerException("can gen the eckey by the input seckey");
+            throw new NullPointerException("can't gen the eckey by the input seckey");
         }
 
         tx.sign(key);
