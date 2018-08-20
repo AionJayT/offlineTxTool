@@ -1,5 +1,5 @@
 # offlineTxTool
-java app for gen raw transaction and pub/sec keypair
+java app for generate raw transaction and pub/sec keypair
 
 # prerequired
 java 10
