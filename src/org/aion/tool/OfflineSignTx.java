@@ -57,11 +57,29 @@ public class OfflineSignTx {
         @Nonnull final String data,
         @Nonnull final String nrg,
         @Nonnull final String nrgPrice,
-        @Nonnull final String secKey
-        ) throws Exception {
+        @Nonnull final String secKey) throws Exception {
         try {
             return signTx(from, to, new BigInteger(value), new BigInteger(nonce), data,
                 Long.valueOf(nrg), Long.valueOf(nrgPrice), secKey);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public static SignedTx signedTx(
+        @Nonnull final String from,
+        @Nonnull final String to,
+        @Nonnull final String value,
+        @Nonnull final String nonce,
+        @Nonnull final String data,
+        @Nonnull final String nrg,
+        @Nonnull final String nrgPrice,
+        @Nonnull final String secKey,
+        @Nonnull final String timeStamp
+        ) throws Exception {
+        try {
+            return signTx(from, to, new BigInteger(value), new BigInteger(nonce), data,
+                Long.valueOf(nrg), Long.valueOf(nrgPrice), secKey, Long.valueOf(timeStamp));
         } catch (Exception e) {
             throw new Exception(e);
         }
@@ -75,7 +93,19 @@ public class OfflineSignTx {
         @Nonnull final String data,
         final long nrg,
         final long nrgPrice,
-        @Nonnull final String secKey
+        @Nonnull final String secKey) {
+        return signTx(from, to, value, nonce, data, nrg, nrgPrice, secKey, 0);
+    }
+    public static SignedTx signTx(
+        @Nonnull final String from,
+        @Nonnull final String to,
+        @Nonnull final BigInteger value,
+        @Nonnull final BigInteger nonce,
+        @Nonnull final String data,
+        final long nrg,
+        final long nrgPrice,
+        @Nonnull final String secKey,
+        final long timeStamp
         ) {
         ByteUtil.hexStringToBytes(data);
 
@@ -86,7 +116,11 @@ public class OfflineSignTx {
             throw new NullPointerException("can gen the eckey by the input seckey");
         }
 
-        tx.sign(key);
+        if (timeStamp == 0) {
+            tx.sign(key);
+        } else {
+            tx.sign(key, timeStamp);
+        }
 
         String raw = ByteUtil.toHexString(tx.getEncoded());
         String msgHash = ByteUtil.toHexString(tx.getHash());

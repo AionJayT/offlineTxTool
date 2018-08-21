@@ -42,7 +42,18 @@ public class OfflineSignTest {
         System.out.println("sec key2:" + kp2.getSecKey());
         System.out.println("address2:" + kp2.getAddr());
 
+        //Assign timestamp
+        String ts = "1";
         SignedTx stx = OfflineSignTx
+            .signedTx(kp.getAddr(), kp2.getAddr(), "1", "0", "", "50000", "10000000000",
+                kp.getSecKey(), ts);
+
+        System.out.println();
+        System.out.println("SignedTx raw:" + stx.getRawTx());
+        System.out.println("SignedTx hash:" + stx.getMsgHash());
+
+        //no timestamp, given by the sign method
+        stx = OfflineSignTx
             .signedTx(kp.getAddr(), kp2.getAddr(), "1", "0", "", "50000", "10000000000",
                 kp.getSecKey());
 

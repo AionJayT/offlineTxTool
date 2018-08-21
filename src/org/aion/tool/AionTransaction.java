@@ -300,7 +300,11 @@ public class AionTransaction extends AbstractTransaction {
     }
 
     public void sign(ECKey key) throws MissingPrivateKeyException {
-        this.timeStamp = ByteUtil.longToBytes(TimeInstant.now().toEpochMicro());
+        sign(key, TimeInstant.now().toEpochMicro());
+    }
+
+    public void sign(ECKey key, long timeStamp) throws MissingPrivateKeyException {
+        this.timeStamp = ByteUtil.longToBytes(timeStamp);
         this.signature = key.sign(this.getRawHash());
         this.rlpEncoded = null;
     }
