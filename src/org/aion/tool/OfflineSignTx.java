@@ -111,6 +111,11 @@ public class OfflineSignTx {
 
         AionTransaction tx = new AionTransaction(nonce.toByteArray(), Address.wrap(from), Address.wrap(to), value.toByteArray(), ByteUtil.hexStringToBytes(data), nrg, nrgPrice);
 
+        return getSignedTx(secKey, timeStamp, tx);
+    }
+
+    private static SignedTx getSignedTx(@Nonnull final String secKey, final long timeStamp,
+        AionTransaction tx) {
         ECKey key = ECKeyFac.inst().fromPrivate(ByteUtil.hexStringToBytes(secKey));
         if (key == null) {
             throw new NullPointerException("can't gen the eckey by the input seckey");
@@ -128,4 +133,31 @@ public class OfflineSignTx {
         return new SignedTx(raw, msgHash);
     }
 
+    public static SignedTx signRawTx(@Nonnull final byte[] rawTx, @Nonnull final String secKey, final long timeStamp) {
+
+        ECKey key = ECKeyFac.inst().fromPrivate(ByteUtil.hexStringToBytes(secKey));
+        if (key == null) {
+            throw new NullPointerException("can't gen the eckey by the input seckey");
+        }
+
+        AionTransaction tx = new AionTransaction(null);
+        tx.setEncodedRaw(rawTx);
+        tx.setTimeStamp(timeStamp);
+        return getSignedTx(secKey, timeStamp, tx);
+    }
+
+    public static byte[] rawTxWithoutSign(
+        @Nonnull final String from,
+        @Nonnull final String to,
+        @Nonnull final String value,
+        @Nonnull final String nonce,
+        @Nonnull final String data,
+        final long nrg,
+        final long nrgPrice
+    ) {
+        ByteUtil.hexStringToBytes(data);
+        AionTransaction tx = new AionTransaction(new BigInteger(nonce).toByteArray(), Address.wrap(from), Address.wrap(to), new BigInteger(value).toByteArray(), ByteUtil.hexStringToBytes(data), nrg, nrgPrice);
+
+        return tx.getEncodedRaw();
+    }
 }
